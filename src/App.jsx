@@ -1,16 +1,18 @@
-export default function App() {
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LandingPage from "./pages/LandingPage";
+
+function App() {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <h2 className="text-red-950 font-semibold uppercase">billion brands</h2>
-      <div className="text-green-500 font-serif underline-offset-0">
-        juliebaby
-      </div>
-      <p>
-        lorem ipsum fkn dfisen fn sdlzsmlj
-        slifesnzfiznnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndrihf
-        ndsmzkslensrjt4hrgnx dmklfexiorjnxg
-      </p>
-    </div>
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </>
   );
 }
+
+export default App;
