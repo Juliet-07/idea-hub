@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import BGIMAGE from "../assets/background.png";
 import Logo from "../assets/logo.png";
 import Person from "../assets/person.png";
@@ -16,6 +17,7 @@ import Footer from "../assets/footer.png";
 import Copyrights from "../assets/Copyrights.png";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   const ideas = [
     {
       icon: <img src={Icon1} />,
@@ -84,7 +86,10 @@ const LandingPage = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
               feugiat, dolor non imperdiet varius, diam urna interdum.
             </p>
-            <div className="w-[174px] h-[56px] border border-white rounded-lg flex items-center justify-center">
+            <div
+              className="w-[174px] h-[56px] border border-white rounded-lg flex items-center justify-center cursor-pointer"
+              onClick={() => navigate("/signin")}
+            >
               Get Started
             </div>
           </div>
