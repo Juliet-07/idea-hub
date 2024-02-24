@@ -41,7 +41,7 @@ const Navbar = () => {
             <span>Home</span>
           </div>
         </NavLink>
-        <NavLink to="/saved/interested" style={activeStyle}>
+        <NavLink to="/groups" style={activeStyle}>
           <div className="flex flex-col items-center justify-center mr-2">
             <CiSaveDown2 />
             <span>Groups</span>
