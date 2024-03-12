@@ -34,23 +34,23 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Navigation Menu */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 font-mono">
         <NavLink to="/employee" style={activeStyle}>
           <div className="flex flex-col items-center justify-center mr-2">
             <BiHomeAlt2 />
             <span>Home</span>
           </div>
         </NavLink>
-        <NavLink to="/groups" style={activeStyle}>
+        <NavLink to="/myCampaigns" style={activeStyle}>
           <div className="flex flex-col items-center justify-center mr-2">
             <CiSaveDown2 />
-            <span>Groups</span>
+            <span>My Campaigns</span>
           </div>
         </NavLink>
-        <div className="flex flex-col items-center justify-center mr-2">
+        {/* <div className="flex flex-col items-center justify-center mr-2">
           <IoMdNotificationsOutline />
           <span>Notifications</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

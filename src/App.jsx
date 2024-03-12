@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Groups from "./pages/employee/groups";
+import MyCampaigns from "./pages/employee/userCampaigns";
 import Employee from "./pages/employee/landingPage";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/moderator" element={<Moderator />} />
         {/* <Route path="/details/:id" element={<Details />} /> */}
         <Route path="/details" element={<Details />} />
-        <Route path="/groups" element={<Groups />} />
+        <Route path="/myCampaigns" element={<MyCampaigns />} />
         <Route path="/management" element={<Management />} />
       </Routes>
     </>

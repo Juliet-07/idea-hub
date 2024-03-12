@@ -12,42 +12,31 @@ const Employee = () => {
   const apiURL = import.meta.env.VITE_REACT_APP_GET_IDEA_HUB_EMPLOYEE;
   const user = JSON.parse(localStorage.getItem("userInfo"));
   const { handleSubmit } = useForm();
-  const [modal, setModal] = useState(false);
+  const [initials, setInitials] = useState("");
   const [ideas, setIdeas] = useState([]);
-  const [branches, setBranches] = useState([]);
-  const [groups, setGroups] = useState([]);
-  const [additionalFields, setAdditionalFields] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [campaignNames, setCampaignNames] = useState([]);
+  const [selectedCampaignName, setSelectedCampaignName] = useState("");
+  const [details, setDetails] = useState("");
   const [campaignCategory, setCampaignCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState("");
+  const [branches, setBranches] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState("");
+  const [additionalFields, setAdditionalFields] = useState([]);
   const [inputValue, setValue] = useState("");
   const [inputValue1, setValue1] = useState("");
   const [inputValue2, setValue2] = useState("");
+  const [inputValue3, setValue3] = useState("");
   const [commentInputs, setCommentInputs] = useState("");
   const [likedCampaigns, setLikedCampaigns] = useState([]);
 
+  // handleChange for Key Features
   const handleAddField = () => {
     if (additionalFields.length < 5) {
       setAdditionalFields([...additionalFields, { value: "" }]);
     }
-  };
-
-  const initialValue = {
-    campaignName: "",
-    campaignCategory: "",
-    groupOwner: "",
-    details: "",
-    createdBy: "",
-    initiatorBranch: "",
-    keyFeatures: [],
-  };
-  const [newCampaign, setNewCampaign] = useState(initialValue);
-  const { campaignName, details } = newCampaign;
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewCampaign({ ...newCampaign, [name]: value });
   };
 
   const handleInputChange = (index, event) => {
@@ -56,6 +45,17 @@ const Employee = () => {
     setAdditionalFields(updatedFields); // Assuming setAdditionalFields is a function to update the state
   };
 
+  //   handle selection for Campaign names
+  const handleCampaignNameInputChange = (value) => {
+    setValue3(value);
+  };
+  const handleSelectCampaignName = (value) => {
+    console.log(value, "values");
+    setSelectedCampaignName(value);
+    console.log(selectedCampaignName, "campaign names");
+  };
+
+  //   handle selection for Category
   const handleCategoryInputChange = (value) => {
     setValue(value);
   };
@@ -94,6 +94,23 @@ const Employee = () => {
     axios.get(url).then((response) => {
       console.log(response, "for ideas");
       setIdeas(response.data.responseValue);
+    });
+  };
+
+  const getCampaignNames = () => {
+    let campaignName;
+    let campaignNameValue;
+    const url = `${apiURL}/GetCampaignTitleList`;
+    axios.get(url).then((response) => {
+      console.log(response);
+      campaignName = response.data.responseValue;
+      campaignNameValue = campaignName.map((campaignNames) => {
+        return {
+          value: campaignNames.CampaignId,
+          label: campaignNames.CampaignName,
+        };
+      });
+      setCampaignNames(campaignNameValue);
     });
   };
 
@@ -145,19 +162,27 @@ const Employee = () => {
   };
 
   useEffect(() => {
+    const _initials = user.name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    setInitials(_initials);
     getIdeas();
     getCategories();
     getDepartments();
     getBranches();
+    getCampaignNames();
     console.log(selectedCategory, "selected category");
     console.log(selectedGroup, "selected group");
     console.log(selectedBranch, "selected branch");
-  }, [selectedCategory, selectedGroup, selectedBranch]);
+    console.log(selectedCampaignName, "selected campaignNames");
+  }, [selectedCategory, selectedGroup, selectedBranch, selectedCampaignName]);
 
   const postCampaign = () => {
     const url = `${apiURL}/PostNewCampaign`;
     const payload = {
-      ...newCampaign,
+      details: details,
+      campaignName: selectedCampaignName.label,
       campaignCategory: selectedCategory.label,
       groupOwner: selectedGroup.label,
       createdBy: user.name,
@@ -202,18 +227,18 @@ const Employee = () => {
     });
   };
 
-  http: return (
+  return (
     <>
       <Navbar />
-      <div className="py-10 bg-slate-100/50">
+      <div className="py-10 bg-slate-100/50 font-mono">
         <div className="w-full h-screen flex bg-green-5">
           {/* User Profile Card */}
           <div className="w-[326.04px] h-[604.09px] bg-white rounded-xl shadow border mx-20 flex flex-col items-center justify-center gap-10">
             <div className="flex flex-col items-center justify-center">
-              <div className="w-20 h-20 rounded-full bg-[#E43625] text-white text-4xl flex items-center justify-center">
-                AN
+              <div className="w-20 h-20 rounded-full bg-[#E43625] text-white text-3xl flex items-center justify-center p-2 font-medium font-mono">
+                {initials}
               </div>
-              <div className="py-2 font-semibold">Amaka Nwanze</div>
+              <div className="py-2 font-semibold">{user.name}</div>
             </div>
 
             {/* <div className="flex">
@@ -340,12 +365,12 @@ const Employee = () => {
                 >
                   Campaign Name
                 </label>
-                <input
-                  className="appearance-none block w-full text-gray-700 rounded-full p-3 leading-tight focus:outline-none border border-gray-400"
-                  name="campaignName"
-                  value={campaignName}
-                  onChange={handleChange}
-                  required
+                <Select
+                  options={campaignNames}
+                  defaultValue={selectedCampaignName}
+                  onChange={handleSelectCampaignName}
+                  onInputChange={handleCampaignNameInputChange}
+                  isSearchable
                 />
               </div>
 
@@ -360,7 +385,7 @@ const Employee = () => {
                   className="appearance-none block p-3 w-full text-sm text-gray-700 rounded border border-gray-400 focus:outline-none leading-tight"
                   name="details"
                   value={details}
-                  onChange={handleChange}
+                  onChange={(e) => setDetails(e.target.value)}
                   required
                 />
                 <label
@@ -385,15 +410,6 @@ const Employee = () => {
                   isSearchable
                 />
               </div>
-              {/* <div className="mt-6">
-                <label
-                  htmlFor="details"
-                  className="block text-[#D3D0D0] text-xs mb-2"
-                >
-                  Add Supporting Document (if any)
-                </label>
-                <Input type="file" />
-              </div> */}
               <div className="mt-4">
                 <label
                   htmlFor="details"

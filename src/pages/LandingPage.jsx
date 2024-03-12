@@ -63,7 +63,7 @@ const LandingPage = () => {
     },
   ];
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full font-mono">
       <div
         className="w-full relative bg-cover"
         style={{

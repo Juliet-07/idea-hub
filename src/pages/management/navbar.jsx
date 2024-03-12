@@ -20,18 +20,18 @@ const Navbar = () => {
 
       {/* Desktop Navigation Menu */}
       <div className="flex items-center gap-10">
-        <NavLink to="/management" style={activeStyle}>
+        {/* <NavLink to="/management" style={activeStyle}>
           <div className="flex flex-col items-center justify-center mr-2">
             <BiHomeAlt2 size={30} />
-            {/* <span>Home</span> */}
+            <span>Home</span>
           </div>
-        </NavLink>
-        <NavLink to="/groups" style={activeStyle}>
+        </NavLink> */}
+        {/* <NavLink to="/groups" style={activeStyle}>
           <div className="flex flex-col items-center justify-center mr-2">
             <PiEnvelopeLight size={30} />
-            {/* <span>Groups</span> */}
+            <span>Groups</span>
           </div>
-        </NavLink>
+        </NavLink> */}
       </div>
     </div>
   );

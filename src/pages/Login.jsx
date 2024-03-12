@@ -59,9 +59,9 @@ const Login = () => {
 
   const loginInfo = JSON.parse(localStorage.getItem("userInfo"));
   const handleRole = async () => {
-    // let email = loginInfo.givenname;
+    let email = loginInfo.givenname;
     // let email = "Sarah.Omoike";
-    let email = "Tolulope.Buraimoh";
+    // let email = "Tolulope.Buraimoh";
     let user;
     let url = `http://192.168.201.57:449/api/UserApplications/getUserRoleByEmail&AppId?AppId=${APP_ID}&email=${email}@premiumtrustbank.com`;
     try {
