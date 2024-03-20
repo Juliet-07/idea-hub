@@ -183,9 +183,10 @@ const Employee = () => {
     const payload = {
       details: details,
       campaignName: selectedCampaignName.label,
+      campaignId: selectedCampaignName.value,
       campaignCategory: selectedCategory.label,
       groupOwner: selectedGroup.label,
-      createdBy: user.name,
+      createdBy: `${user.givenname}@premiumtrustbank.com`,
       initiatorBranch: selectedBranch.label,
       keyFeatures: additionalFields.map((field) => field.value),
     };

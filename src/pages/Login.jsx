@@ -59,32 +59,32 @@ const Login = () => {
 
   const loginInfo = JSON.parse(localStorage.getItem("userInfo"));
   const handleRole = async () => {
-    let email = loginInfo.givenname;
-    // let email = "Sarah.Omoike";
+    // let email = loginInfo.givenname;
+    let email = "Sarah.Omoike";
     // let email = "Tolulope.Buraimoh";
     let user;
     let url = `http://192.168.201.57:449/api/UserApplications/getUserRoleByEmail&AppId?AppId=${APP_ID}&email=${email}@premiumtrustbank.com`;
     try {
       //   setShowSplash(true);
-      const response = await axios.get(url);
+      const response = await axios.post(url);
       console.log(response.data, "User Info IdeaHub");
       user = response.data;
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // navigation
-      if (user.data === null && user.responseMessage === "User Not Profiled") {
+      if (
+        user.data === null &&
+        user.responseMessage === "User Not Profiled on 1230"
+      ) {
         return navigate("/employee");
       }
-      // if (user.roleDescription === "Employee") {
-      //   return navigate("/employee");
-      // }
-      if (user.roleDescription === "Moderator") {
+      if (user.responseValue.roleDescription === "Moderator") {
         return navigate("/moderator");
       }
-      if (user.roleDescription === "Management") {
+      if (user.responseValue.roleDescription === "Management") {
         return navigate("/management");
       }
-      if (user.roleDescription === "IT") {
+      if (user.responseValue.roleDescription === "IT") {
         return navigate("/it-team");
       }
     } catch (error) {

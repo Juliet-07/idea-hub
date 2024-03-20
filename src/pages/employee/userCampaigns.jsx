@@ -9,7 +9,7 @@ const MyCampaigns = () => {
 
   const GetMyCampaigns = () => {
     let staffEmail = user.givenname;
-    const url = `${apiURL}/GetCampaignsByStaff?staffEmail=${staffEmail}`;
+    const url = `${apiURL}/GetCampaignsByStaff?staffEmail=${staffEmail}@premiumtrustbank.com`;
     axios
       .get(url)
       .then((response) => {
@@ -32,9 +32,8 @@ const MyCampaigns = () => {
             <thead className="text-xs font-mono text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
               <tr>
                 <th className="p-4">Campaign Name</th>
-                {/* <th className="p-4">Email</th>
-                <th className="p-4">Phone Number</th>
-                <th className="p-4">Branch</th> */}
+                <th className="p-4">Campaign Category</th>
+                <th className="p-4">Date Created</th>
                 <th className="p-4">Stage</th>
                 <th className="p-4"></th>
               </tr>
@@ -44,20 +43,22 @@ const MyCampaigns = () => {
                 myCampaigns.map((user, index) => {
                   return (
                     <tr key={index}>
-                      <td className="px-6 whitespace-nowrap">
-                        {`${user?.firstName} ${user?.lastName}`}
-                      </td>
-                      <td className="p-4 whitespace-nowrap">{user?.email}</td>
                       <td className="p-4 whitespace-nowrap">
-                        {user?.phoneNumber}
+                        ${user?.campaignName}
                       </td>
-                      <td className="p-4 whitespace-nowrap">{user?.branch}</td>
+                      <td className="p-4 whitespace-nowrap">
+                        {user?.campaignCategory}
+                      </td>
+                      <td className="p-4 whitespace-nowrap">
+                        {user?.createdDate}
+                      </td>
+
                       <td
                         className={`p-4 whitespace-nowrap ${
                           user?.isActive ? "text-green-500" : "text-red-500"
                         }`}
                       >
-                        {user?.isActive ? "Active" : "Inactive"}
+                        {user?.statusCodeDescription}
                       </td>
                       <td className="p-4 text-black cursor-pointer">
                         {/* <FaEye

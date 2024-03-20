@@ -7,6 +7,7 @@ import Navbar from "./navbar";
 const Management = () => {
   const apiURL = import.meta.env.VITE_REACT_APP_GET_IDEA_HUB_MANAGEMENT;
   const user = JSON.parse(localStorage.getItem("userInfo"));
+  const [initials, setInitials] = useState("");
   const [management, setManagement] = useState([]);
   const [summary, setSummary] = useState({});
 
@@ -59,6 +60,11 @@ const Management = () => {
   };
 
   useEffect(() => {
+    const _initials = user.name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    setInitials(_initials);
     GetMyCampaigns();
     GetInteractionSummary();
   }, []);
@@ -71,10 +77,10 @@ const Management = () => {
           <div className="flex flex-col items-center gap-4">
             <div className="w-[326px] h-[489px] bg-white rounded-xl shadow border mx-20 flex flex-col items-center justify-center gap-10">
               <div className="flex flex-col items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-[#E43625] text-white text-4xl flex items-center justify-center">
-                  AN
+                <div className="w-20 h-20 rounded-full bg-[#E43625] text-white text-3xl flex items-center justify-center p-2 font-medium font-mono">
+                  {initials}
                 </div>
-                <div className="py-2 font-semibold">Amaka Nwanze</div>
+                <div className="py-2 font-semibold">{user.name}</div>
               </div>
 
               {/* <div className="flex">
