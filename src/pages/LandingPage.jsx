@@ -75,22 +75,21 @@ const LandingPage = () => {
           <div className="w-[227.85px]">
             <img src={Logo} />
           </div>
-          <p className="text-white">How it works</p>
+          <p className="text-white"></p>
         </div>
         <div className="w-full flex items-center justify-around relative z-[3] p-4">
           <div className="w-[533px] text-white flex flex-col">
             <p className="font-semibold text-5xl">
-              The best platform to unlock your premium potentials.
+              Our growth is incomplete without you.
             </p>
             <p className="py-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              feugiat, dolor non imperdiet varius, diam urna interdum.
+             Your ideas are the missing link between where we are now and where we want to be.
             </p>
             <div
-              className="w-[174px] h-[56px] border border-white rounded-lg flex items-center justify-center cursor-pointer"
+              className="w-[170px] h-[50px] border border-white rounded-lg flex items-center justify-center cursor-pointer"
               onClick={() => navigate("/signin")}
             >
-              Get Started
+              Start Writing
             </div>
           </div>
           <div className="w-[818.29px]">

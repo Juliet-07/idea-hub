@@ -401,7 +401,7 @@ const Employee = () => {
                   htmlFor="details"
                   className="text-[#2b2e35] text-sm font-medium mb-2"
                 >
-                  Select Category
+                  Campaign Category
                 </label>
                 <Select
                   options={campaignCategory}
@@ -416,7 +416,7 @@ const Employee = () => {
                   htmlFor="details"
                   className="text-[#2b2e35] text-sm font-medium mb-2"
                 >
-                  Select Group
+                  User Group
                 </label>
                 <Select
                   options={groups}
@@ -431,7 +431,7 @@ const Employee = () => {
                   htmlFor="details"
                   className="text-[#2b2e35] text-sm font-medium mb-2"
                 >
-                  Select Branch
+                  User Branch
                 </label>
                 <Select
                   options={branches}
@@ -456,10 +456,10 @@ const Employee = () => {
               <div className="mt-4 flex items-center">
                 <button
                   type="button"
-                  className="bg-green-500 text-white px-4 py-2 rounded"
+                  className="bg-green-500 text-white p-2 rounded"
                   onClick={handleAddField}
                 >
-                  Add Potential Benefits
+                  Add Key Features
                 </button>
                 <p className="text-red-600 text-xs pl-2">
                   Kindly add at least one key feature for your campaign
